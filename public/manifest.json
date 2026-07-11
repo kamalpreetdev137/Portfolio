@@ -1,0 +1,16 @@
+{
+  "name": "Kamalpreet.dev",
+  "short_name": "Kamalpreet.dev",
+  "description": "Portfolio of Kamalpreet, a Full Stack Developer & AI Engineer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050816",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
