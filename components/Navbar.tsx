@@ -58,9 +58,11 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-white">
-                KP
-              </div>
+              <img
+                src="/profile.jpg"
+                alt="Kamalpreet"
+                className="h-8 w-8 rounded-lg object-cover"
+              />
               <span className="text-lg font-semibold text-text-primary">
                 Kamalpreet<span className="text-primary">.dev</span>
               </span>

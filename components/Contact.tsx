@@ -100,6 +100,19 @@ export default function Contact() {
               className="flex flex-col gap-8"
             >
               <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <img
+                    src="/profile.jpg"
+                    alt="Kamalpreet"
+                    className="h-16 w-16 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-xl font-semibold text-text-primary">
+                      Kamalpreet Singh
+                    </h3>
+                    <p className="text-sm text-text-secondary">Full Stack Developer & AI Engineer</p>
+                  </div>
+                </div>
                 <h3 className="text-xl font-semibold text-text-primary">
                   Get in Touch
                 </h3>
