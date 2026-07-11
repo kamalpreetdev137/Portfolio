@@ -8,6 +8,7 @@ import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { cn } from "@/lib/utils";
 import LayoutContainer from "./LayoutContainer";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const { isScrolled } = useScrollPosition();
@@ -44,7 +45,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-background/70 backdrop-blur-2xl border-b border-white/5 shadow-lg shadow-black/10"
+            ? "bg-background/70 backdrop-blur-2xl border-b border-border shadow-lg"
             : "bg-transparent"
         )}
       >
@@ -68,7 +69,7 @@ export default function Navbar() {
               </span>
             </a>
 
-            <div className="hidden items-center gap-1 md:flex">
+            <div className="hidden items-center gap-2 md:flex">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.href}
@@ -94,22 +95,26 @@ export default function Navbar() {
                   <span className="relative z-10">{item.label}</span>
                 </a>
               ))}
+              <ThemeToggle />
               <a
                 href="/resume"
-                className="ml-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/25"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/25"
               >
                 <Download size={14} />
                 Resume
               </a>
             </div>
 
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="flex items-center justify-center rounded-lg p-2 text-text-secondary transition-colors hover:text-text-primary md:hidden"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="flex items-center justify-center rounded-lg p-2 text-text-secondary transition-colors hover:text-text-primary"
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              >
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </nav>
         </LayoutContainer>
       </motion.header>

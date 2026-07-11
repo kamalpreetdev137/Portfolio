@@ -45,6 +45,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light Mode */
+html.light {
+  --color-background: #F8FAFC;
+  --color-surface: #F1F5F9;
+  --color-card: #FFFFFF;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+}
+
+html.light body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -58,8 +73,16 @@ body {
   border-radius: 3px;
 }
 
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ::selection {
