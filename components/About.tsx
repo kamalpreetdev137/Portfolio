@@ -13,32 +13,44 @@ export default function About() {
       <LayoutContainer ref={ref}>
         <div className="flex flex-col gap-16">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
             className="text-center"
           >
             <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
               About Me
             </p>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Crafting Digital Experiences
+              Crafting Digital{" "}
+              <span className="bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
+                Experiences
+              </span>
             </h2>
           </motion.div>
 
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="w-full overflow-hidden rounded-2xl border border-border bg-card">
-              <img
-                src="/profile.jpg"
-                alt="Kamalpreet - Full Stack Developer"
-                className="aspect-square w-full object-cover"
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-primary/20 to-primary/10 blur-xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
+                <img
+                  src="/profile.jpg"
+                  alt="Kamalpreet - Full Stack Developer"
+                  className="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              </div>
+            </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="flex flex-col gap-6"
             >
               <h3 className="text-2xl font-bold text-text-primary">
@@ -67,7 +79,7 @@ export default function About() {
                   (tag) => (
                     <span
                       key={tag}
-                      className="rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary"
+                      className="rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary/20"
                     >
                       {tag}
                     </span>
@@ -78,20 +90,20 @@ export default function About() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4"
           >
             {STATS.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.3, delay: 0.25 + i * 0.08 }}
-                className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-card/50 p-6 text-center transition-colors hover:border-primary/30 hover:bg-card"
+                transition={{ duration: 0.4, delay: 0.35 + i * 0.1 }}
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-border bg-card/50 p-6 text-center transition-all hover:border-primary/30 hover:bg-card hover:shadow-lg hover:shadow-primary/5"
               >
-                <div className="text-3xl font-bold text-primary sm:text-4xl">
+                <div className="text-3xl font-bold text-primary transition-transform group-hover:scale-110 sm:text-4xl">
                   {stat.value}
                 </div>
                 <div className="text-sm text-text-secondary">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Linkedin, Instagram, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Twitter, Mail, Heart } from "lucide-react";
 import { NAV_ITEMS, SOCIAL_LINKS } from "@/constants";
 import LayoutContainer from "./LayoutContainer";
 
@@ -30,12 +30,12 @@ export default function Footer() {
               e.preventDefault();
               handleNavClick("#home");
             }}
-            className="flex items-center gap-2"
+            className="group flex items-center gap-2"
           >
             <img
               src="/profile.jpg"
               alt="Kamalpreet"
-              className="h-8 w-8 rounded-lg object-cover"
+              className="h-8 w-8 rounded-lg object-cover ring-2 ring-primary/30 transition-all group-hover:ring-primary"
             />
             <span className="text-lg font-semibold text-text-primary">
               Kamalpreet<span className="text-primary">.dev</span>
@@ -51,7 +51,7 @@ export default function Footer() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-sm text-text-secondary transition-colors hover:text-text-primary"
+                className="text-sm text-text-secondary transition-colors hover:text-primary"
               >
                 {item.label}
               </a>
@@ -67,7 +67,7 @@ export default function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-text-secondary transition-colors hover:border-primary/30 hover:text-primary"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-text-secondary transition-all hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
                   aria-label={social.name}
                 >
                   <Icon size={16} />
@@ -77,11 +77,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border py-6 text-center">
-          <p className="text-sm text-text-secondary">
-            &copy; {new Date().getFullYear()} Kamalpreet.dev. All rights
-            reserved.
-          </p>
+        <div className="border-t border-border py-6">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="text-sm text-text-secondary">
+              &copy; {new Date().getFullYear()} Kamalpreet.dev. All rights
+              reserved.
+            </p>
+            <p className="flex items-center gap-1 text-sm text-text-secondary">
+              Made with <Heart size={14} className="text-red-500" fill="currentColor" /> using Next.js
+            </p>
+          </div>
         </div>
       </LayoutContainer>
     </footer>

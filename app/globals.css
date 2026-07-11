@@ -16,6 +16,7 @@
 
   --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
   --animate-spin-slow: spin-slow 20s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
 @keyframes pulse-slow {
@@ -26,6 +27,11 @@
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 html {
@@ -59,4 +65,17 @@ body {
 ::selection {
   background: rgba(59, 130, 246, 0.3);
   color: var(--color-text-primary);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
 }

@@ -40,11 +40,11 @@ export default function Navbar() {
       <motion.header
         initial={{ y: -64 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border"
+            ? "bg-background/70 backdrop-blur-2xl border-b border-white/5 shadow-lg shadow-black/10"
             : "bg-transparent"
         )}
       >
@@ -56,12 +56,12 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNavClick("#home");
               }}
-              className="flex items-center gap-2"
+              className="group flex items-center gap-2"
             >
               <img
                 src="/profile.jpg"
                 alt="Kamalpreet"
-                className="h-8 w-8 rounded-lg object-cover"
+                className="h-8 w-8 rounded-lg object-cover ring-2 ring-primary/30 transition-all group-hover:ring-primary"
               />
               <span className="text-lg font-semibold text-text-primary">
                 Kamalpreet<span className="text-primary">.dev</span>
@@ -78,18 +78,25 @@ export default function Navbar() {
                     handleNavClick(item.href);
                   }}
                   className={cn(
-                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    "relative rounded-lg px-4 py-2 text-sm font-medium transition-all",
                     activeSection === item.href.slice(1)
                       ? "text-primary"
                       : "text-text-secondary hover:text-text-primary"
                   )}
                 >
-                  {item.label}
+                  {activeSection === item.href.slice(1) && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute inset-0 rounded-lg bg-primary/10"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
                 </a>
               ))}
               <a
                 href="/resume"
-                className="ml-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-light"
+                className="ml-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/25"
               >
                 <Download size={14} />
                 Resume
@@ -113,22 +120,22 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-2xl md:hidden"
           >
             <nav className="flex flex-col items-center justify-center gap-8 pt-24">
               {NAV_ITEMS.map((item, i) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
+                  transition={{ delay: i * 0.1, ease: "easeOut" }}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(item.href);
                   }}
                   className={cn(
-                    "text-2xl font-medium transition-colors",
+                    "text-3xl font-medium transition-colors",
                     activeSection === item.href.slice(1)
                       ? "text-primary"
                       : "text-text-secondary hover:text-text-primary"
@@ -139,12 +146,12 @@ export default function Navbar() {
               ))}
               <motion.a
                 href="/resume"
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: NAV_ITEMS.length * 0.08 }}
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-lg font-medium text-white"
+                transition={{ delay: NAV_ITEMS.length * 0.1, ease: "easeOut" }}
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-medium text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/25"
               >
-                <Download size={18} />
+                <Download size={20} />
                 Resume
               </motion.a>
             </nav>
