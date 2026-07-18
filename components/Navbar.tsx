@@ -21,20 +21,14 @@ export default function Navbar() {
     NAV_ITEMS.map((item) => item.href.slice(1))
   );
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const { scrollToSection } = useHashNavigation();
 
   useEffect(() => {
-    if (!headerRef.current) return;
-    gsap.from(headerRef.current, {
-      y: -80,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power4.out",
-      delay: 0.3,
-    });
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -81,6 +75,7 @@ export default function Navbar() {
         ref={headerRef}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0",
           isScrolled
             ? "bg-background/70 backdrop-blur-2xl border-b border-border shadow-lg"
             : "bg-transparent"
