@@ -14,10 +14,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kamalpreet.dev | Full Stack Developer & AI Engineer",
+  title: {
+    default: "Kamalpreet Singh | Full Stack Developer & AI Engineer",
+    template: "%s | Kamalpreet.dev",
+  },
   description:
-    "Portfolio of Kamalpreet, a Full Stack Developer specializing in AI applications, modern web development, automation, and scalable digital products.",
+    "Kamalpreet Singh - Full Stack Developer & AI Engineer specializing in React, Next.js, Node.js, and AI-powered applications. Building modern web experiences and scalable digital products.",
   keywords: [
+    "Kamalpreet Singh",
+    "Kamalpreet",
+    "Kamalpreet Developer",
+    "Kamalpreet.dev",
     "Full Stack Developer",
     "AI Engineer",
     "Next.js Developer",
@@ -28,33 +35,41 @@ export const metadata: Metadata = {
     "AI Automation",
     "JavaScript",
     "Tailwind CSS",
+    "Node.js",
+    "Frontend Developer",
+    "Backend Developer",
   ],
-  authors: [{ name: "Kamalpreet" }],
-  creator: "Kamalpreet",
+  authors: [{ name: "Kamalpreet Singh" }],
+  creator: "Kamalpreet Singh",
+  publisher: "Kamalpreet Singh",
   metadataBase: new URL("https://kamalpreet.dev"),
+  alternates: {
+    canonical: "https://kamalpreet.dev",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://kamalpreet.dev",
     siteName: "Kamalpreet.dev",
-    title: "Kamalpreet.dev | Full Stack Developer & AI Engineer",
+    title: "Kamalpreet Singh | Full Stack Developer & AI Engineer",
     description:
-      "Portfolio of Kamalpreet, a Full Stack Developer specializing in AI applications, modern web development, automation, and scalable digital products.",
+      "Kamalpreet Singh - Full Stack Developer & AI Engineer specializing in React, Next.js, Node.js, and AI-powered applications.",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Kamalpreet.dev - Full Stack Developer & AI Engineer",
+        alt: "Kamalpreet Singh - Full Stack Developer & AI Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kamalpreet.dev | Full Stack Developer & AI Engineer",
+    title: "Kamalpreet Singh | Full Stack Developer & AI Engineer",
     description:
-      "Portfolio of Kamalpreet, a Full Stack Developer specializing in AI applications, modern web development, automation, and scalable digital products.",
+      "Kamalpreet Singh - Full Stack Developer & AI Engineer specializing in React, Next.js, Node.js, and AI-powered applications.",
     images: ["/og-image.svg"],
+    creator: "@kamalpreet_dev",
   },
   robots: {
     index: true,
@@ -72,19 +87,41 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
   },
+  verification: {
+    google: "your-google-verification-code",
+  },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Kamalpreet",
+  name: "Kamalpreet Singh",
+  alternateName: "Kamalpreet",
   url: "https://kamalpreet.dev",
+  image: "https://kamalpreet.dev/profile.jpg",
   jobTitle: "Full Stack Developer & AI Engineer",
+  description: "Full Stack Developer & AI Engineer specializing in React, Next.js, Node.js, and AI-powered applications.",
+  email: "kamalpreet.dev137@gmail.com",
   sameAs: [
-    "https://github.com/kamalpreet",
+    "https://github.com/kamalpreetdev137",
     "https://linkedin.com/in/kamalpreet",
     "https://x.com/kamalpreet_dev",
+    "https://instagram.com/kamalpreet.dev",
   ],
+  knowsAbout: [
+    "Full Stack Development",
+    "AI Engineering",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "Machine Learning",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Freelance",
+  },
 };
 
 export default function RootLayout({

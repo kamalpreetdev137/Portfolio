@@ -1,7 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#050816"/>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#050816;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0B1220;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#grad2)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="300" fill="#3B82F6" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="250" fill="#3B82F6" opacity="0.05"/>
+  
+  <!-- Card -->
   <rect x="50" y="50" width="1100" height="530" rx="24" fill="#111827" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="600" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#F8FAFC">Kamalpreet.dev</text>
-  <text x="600" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#94A3B8">Full Stack Developer &amp; AI Engineer</text>
-  <rect x="500" y="380" width="200" height="4" rx="2" fill="#3B82F6" opacity="0.5"/>
+  
+  <!-- Profile circle -->
+  <circle cx="300" cy="280" r="120" fill="url(#grad)" opacity="0.2"/>
+  <circle cx="300" cy="280" r="100" fill="#111827"/>
+  <text x="300" y="295" text-anchor="middle" font-family="system-ui, sans-serif" font-size="64" font-weight="700" fill="#3B82F6">KP</text>
+  
+  <!-- Name -->
+  <text x="550" y="220" font-family="system-ui, sans-serif" font-size="56" font-weight="700" fill="#F8FAFC">Kamalpreet Singh</text>
+  
+  <!-- Title -->
+  <text x="550" y="280" font-family="system-ui, sans-serif" font-size="28" fill="#3B82F6" font-weight="600">Full Stack Developer &amp; AI Engineer</text>
+  
+  <!-- Description -->
+  <text x="550" y="330" font-family="system-ui, sans-serif" font-size="18" fill="#94A3B8">Building modern web experiences with React, Next.js &amp; AI</text>
+  
+  <!-- Tech badges -->
+  <rect x="550" y="370" width="80" height="32" rx="6" fill="#3B82F6" opacity="0.1"/>
+  <text x="590" y="391" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#3B82F6" font-weight="600">React</text>
+  
+  <rect x="645" y="370" width="80" height="32" rx="6" fill="#3B82F6" opacity="0.1"/>
+  <text x="685" y="391" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#3B82F6" font-weight="600">Next.js</text>
+  
+  <rect x="740" y="370" width="80" height="32" rx="6" fill="#3B82F6" opacity="0.1"/>
+  <text x="780" y="391" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#3B82F6" font-weight="600">Node.js</text>
+  
+  <rect x="835" y="370" width="80" height="32" rx="6" fill="#3B82F6" opacity="0.1"/>
+  <text x="875" y="391" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#3B82F6" font-weight="600">AI/ML</text>
+  
+  <!-- URL -->
+  <text x="600" y="500" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#94A3B8">kamalpreet.dev</text>
+  
+  <!-- Accent line -->
+  <rect x="500" y="520" width="200" height="4" rx="2" fill="url(#grad)"/>
 </svg>

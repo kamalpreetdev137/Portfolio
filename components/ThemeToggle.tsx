@@ -1,11 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const sunRef = useRef<HTMLDivElement>(null);
+  const moonRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      gsap.to(moonRef.current, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.inOut" });
+      gsap.to(sunRef.current, { scale: 0, rotation: -180, duration: 0.3, ease: "power2.inOut" });
+    } else {
+      gsap.to(sunRef.current, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.inOut" });
+      gsap.to(moonRef.current, { scale: 0, rotation: 180, duration: 0.3, ease: "power2.inOut" });
+    }
+  }, [theme]);
 
   return (
     <button
@@ -13,28 +26,12 @@ export default function ThemeToggle() {
       className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/50 text-text-secondary transition-all hover:border-primary/30 hover:text-primary"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
-      <motion.div
-        initial={false}
-        animate={{
-          scale: theme === "dark" ? 1 : 0,
-          rotate: theme === "dark" ? 0 : 180,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="absolute"
-      >
+      <div ref={moonRef} className="absolute">
         <Moon size={18} />
-      </motion.div>
-      <motion.div
-        initial={false}
-        animate={{
-          scale: theme === "light" ? 1 : 0,
-          rotate: theme === "light" ? 0 : -180,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="absolute"
-      >
+      </div>
+      <div ref={sunRef} className="absolute">
         <Sun size={18} />
-      </motion.div>
+      </div>
     </button>
   );
 }

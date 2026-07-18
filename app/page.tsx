@@ -8,10 +8,15 @@ import Timeline from "@/components/Timeline";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MouseGlow from "@/components/MouseGlow";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 export default function Home() {
   return (
-    <>
+    <SmoothScroll>
+      <CustomCursor />
+      <ScrollProgressBar />
       <MouseGlow />
       <Navbar />
       <main>
@@ -24,6 +29,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </SmoothScroll>
   );
 }

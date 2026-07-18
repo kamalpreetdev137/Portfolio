@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kamalpreet.dev/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: bingbot
+Allow: /
