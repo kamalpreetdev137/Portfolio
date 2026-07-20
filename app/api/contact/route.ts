@@ -1,25 +1,94 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { z } from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be at most 100 characters"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .max(254, "Email must be at most 254 characters"),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(5000, "Message must be at most 5000 characters"),
+});
+
+function sanitizeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  entry.count++;
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, message } = body;
+    const origin = request.headers.get("origin");
+    if (origin && origin !== "https://kamalpreet.dev" && origin !== "http://localhost:3000") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
-    if (!name || !email || !message) {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+      || request.headers.get("x-real-ip")
+      || "unknown";
+
+    if (!checkRateLimit(ip)) {
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    const result = contactSchema.safeParse(body);
+
+    if (!result.success) {
+      const firstError = result.error.errors[0];
+      return NextResponse.json(
+        { error: firstError.message },
         { status: 400 }
       );
     }
 
+    const { name, email, message } = result.data;
+
+    const safeName = sanitizeHtml(name);
+    const safeEmail = sanitizeHtml(email);
+    const safeMessage = sanitizeHtml(message);
+
     const { error } = await resend.emails.send({
       from: "Kamalpreet.dev <onboarding@resend.dev>",
-      to: "kamalpreet.dev137@gmail.com",
+      to: process.env.CONTACT_EMAIL || "kamalpreet.dev137@gmail.com",
       replyTo: email,
-      subject: `[Portfolio] New message from ${name}`,
+      subject: `[Portfolio] New message from ${safeName}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       html: `
         <!DOCTYPE html>
@@ -45,24 +114,24 @@ export async function POST(request: NextRequest) {
                         <tr>
                           <td style="padding-bottom:20px;">
                             <p style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin:0 0 5px 0;">Name</p>
-                            <p style="font-size:16px;color:#333;padding:10px;background:#f8f9fa;border-radius:5px;margin:0;">${name}</p>
+                            <p style="font-size:16px;color:#333;padding:10px;background:#f8f9fa;border-radius:5px;margin:0;">${safeName}</p>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-bottom:20px;">
                             <p style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin:0 0 5px 0;">Email</p>
-                            <p style="font-size:16px;color:#333;padding:10px;background:#f8f9fa;border-radius:5px;margin:0;">${email}</p>
+                            <p style="font-size:16px;color:#333;padding:10px;background:#f8f9fa;border-radius:5px;margin:0;">${safeEmail}</p>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-bottom:20px;">
                             <p style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin:0 0 5px 0;">Message</p>
-                            <div style="background:#f8f9fa;padding:15px;border-radius:5px;white-space:pre-wrap;font-size:16px;color:#333;line-height:1.5;">${message}</div>
+                            <div style="background:#f8f9fa;padding:15px;border-radius:5px;white-space:pre-wrap;font-size:16px;color:#333;line-height:1.5;">${safeMessage}</div>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <a href="mailto:${email}" style="display:inline-block;background:#3B82F6;color:white;padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;">Reply to ${name}</a>
+                            <a href="mailto:${safeEmail}" style="display:inline-block;background:#3B82F6;color:white;padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;">Reply to ${safeName}</a>
                           </td>
                         </tr>
                       </table>
@@ -91,8 +160,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("API error:", error);
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

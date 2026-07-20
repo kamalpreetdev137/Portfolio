@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { Briefcase } from "lucide-react";
 import { EXPERIENCES } from "@/constants";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Timeline() {
   const sectionRef = useRef<HTMLDivElement>(null);

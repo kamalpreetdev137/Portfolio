@@ -1,14 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { ArrowRight, Eye, Sparkles } from "lucide-react";
 import LayoutContainer from "./LayoutContainer";
 import MagneticButton from "./MagneticButton";
 import { useHashNavigation } from "@/hooks/useHashNavigation";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function Particles() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -259,7 +256,7 @@ export default function Hero() {
             </div>
 
             <div ref={headingRef} className="flex flex-col gap-3">
-              <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="whitespace-nowrap text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
                 {headingText.split("").map((char, i) => (
                   <span key={i} className="hero-char inline-block">
                     {char === " " ? "\u00A0" : char}

@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { gsap } from "@/lib/gsap";
 import { Menu, X, Download } from "lucide-react";
 import { NAV_ITEMS } from "@/constants";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
@@ -12,8 +11,6 @@ import { cn } from "@/lib/utils";
 import LayoutContainer from "./LayoutContainer";
 import ThemeToggle from "./ThemeToggle";
 import MagneticButton from "./MagneticButton";
-
-gsap.registerPlugin(ScrollToPlugin);
 
 export default function Navbar() {
   const { isScrolled } = useScrollPosition();

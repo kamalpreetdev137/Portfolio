@@ -19,7 +19,7 @@ export default function Home() {
       <ScrollProgressBar />
       <MouseGlow />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
         <Services />

@@ -1,15 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { ExternalLink, Github, Star, Loader2 } from "lucide-react";
 import { fetchGitHubRepos, getLanguageColor, type Project } from "@/lib/github";
 import { cn } from "@/lib/utils";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "kamalpreetdev137";
 

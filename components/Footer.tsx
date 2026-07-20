@@ -1,15 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { Github, Linkedin, Instagram, Twitter, Mail, Heart } from "lucide-react";
 import { NAV_ITEMS, SOCIAL_LINKS } from "@/constants";
 import LayoutContainer from "./LayoutContainer";
 import MagneticButton from "./MagneticButton";
 import { useHashNavigation } from "@/hooks/useHashNavigation";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const socialIconMap: Record<string, React.ElementType> = {
   Github,

@@ -1,14 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { TECH_STACK, TECH_CATEGORIES } from "@/constants";
 import { cn } from "@/lib/utils";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function TechIcon({ name }: { name: string }) {
   const colors: Record<string, string> = {

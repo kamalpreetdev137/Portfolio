@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { STATS } from "@/constants";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function AnimatedCounter({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) {
   const numStr = value.replace(/[^0-9]/g, "");

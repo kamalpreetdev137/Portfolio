@@ -1,16 +1,13 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
+import { gsap, ScrollToPlugin } from "@/lib/gsap";
 
 export function useHashNavigation() {
   const scrollToSection = useCallback((hash: string) => {
+    if (!/^#[a-zA-Z0-9_-]+$/.test(hash)) return;
     const el = document.querySelector(hash);
     if (el) {
-      // Update URL hash without triggering scroll
       window.history.pushState(null, "", hash);
 
       gsap.to(window, {
@@ -21,11 +18,9 @@ export function useHashNavigation() {
     }
   }, []);
 
-  // Scroll to hash section on page load
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash) {
-      // Small delay to ensure DOM is ready
+    if (hash && /^#[a-zA-Z0-9_-]+$/.test(hash)) {
       const timer = setTimeout(() => {
         const el = document.querySelector(hash);
         if (el) {
@@ -44,7 +39,7 @@ export function useHashNavigation() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash) {
+      if (hash && /^#[a-zA-Z0-9_-]+$/.test(hash)) {
         const el = document.querySelector(hash);
         if (el) {
           gsap.to(window, {

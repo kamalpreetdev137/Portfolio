@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, type ReactNode } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 
 interface MagneticButtonProps {
   children: ReactNode;

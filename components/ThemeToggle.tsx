@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 

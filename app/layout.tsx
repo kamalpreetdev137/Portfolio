@@ -87,9 +87,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
+
 };
 
 const jsonLd = {
@@ -142,6 +140,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           {children}
         </ThemeProvider>

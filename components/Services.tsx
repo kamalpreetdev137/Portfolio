@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import {
   Code,
   Brain,
@@ -14,8 +13,6 @@ import {
 import { SERVICES } from "@/constants";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const iconMap: Record<string, React.ElementType> = {
   Code,

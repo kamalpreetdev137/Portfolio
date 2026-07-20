@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -22,8 +21,6 @@ import { cn } from "@/lib/utils";
 import LayoutContainer from "./LayoutContainer";
 import { TextReveal } from "./TextReveal";
 import MagneticButton from "./MagneticButton";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -85,6 +82,8 @@ function AnimatedInput({
     error ? "border-red-500" : "border-border"
   );
 
+  const errorId = error ? `${props.id}-error` : undefined;
+
   return (
     <div ref={ref} className="relative flex flex-col gap-2">
       <div className="input-glow absolute -inset-1 rounded-xl bg-primary/10 opacity-0 blur-sm" />
@@ -98,6 +97,8 @@ function AnimatedInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={`${fieldClassName} resize-none`}
+          aria-describedby={errorId}
+          aria-invalid={!!error}
         />
       ) : (
         <input
@@ -106,10 +107,12 @@ function AnimatedInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={fieldClassName}
+          aria-describedby={errorId}
+          aria-invalid={!!error}
         />
       )}
       {error && (
-        <p className="relative z-10 text-xs text-red-400">{error}</p>
+        <p id={errorId} className="relative z-10 text-xs text-red-400">{error}</p>
       )}
     </div>
   );
